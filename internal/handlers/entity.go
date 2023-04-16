@@ -2,11 +2,10 @@ package handlers
 
 import (
 	"errors"
+	"refactoring/internal/config"
 	"refactoring/internal/storage"
 	"time"
 )
-
-const store = `users.json`
 
 var UserNotFound = errors.New("user_not_found")
 
@@ -34,8 +33,12 @@ type UpdateUserRequest struct {
 
 type userApiHandler struct {
 	file storage.FileContent
+	cfg  config.ServiceConfiguration
 }
 
-func NewUserApiHandler(file storage.FileContent) *userApiHandler {
-	return &userApiHandler{file: file}
+func NewUserApiHandler(file storage.FileContent, cfg config.ServiceConfiguration) *userApiHandler {
+	return &userApiHandler{
+		file: file,
+		cfg:  cfg,
+	}
 }

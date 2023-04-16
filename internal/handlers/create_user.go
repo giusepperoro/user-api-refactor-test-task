@@ -35,7 +35,7 @@ func (manager *userApiHandler) CreateUser(w http.ResponseWriter, r *http.Request
 	s.List[id] = u
 
 	b, _ := json.Marshal(&s)
-	_ = ioutil.WriteFile(store, b, fs.ModePerm)
+	_ = ioutil.WriteFile(manager.cfg.FileName, b, fs.ModePerm)
 
 	render.Status(r, http.StatusCreated)
 	render.JSON(w, r, map[string]interface{}{
