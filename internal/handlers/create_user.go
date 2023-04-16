@@ -13,10 +13,9 @@ import (
 
 func (c *CreateUserRequest) Bind(r *http.Request) error { return nil }
 
-func CreateUser(w http.ResponseWriter, r *http.Request) {
-	f, _ := ioutil.ReadFile(store)
+func (manager *userApiHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	s := UserStore{}
-	_ = json.Unmarshal(f, &s)
+	_ = json.Unmarshal(manager.file.File, &s)
 
 	request := CreateUserRequest{}
 

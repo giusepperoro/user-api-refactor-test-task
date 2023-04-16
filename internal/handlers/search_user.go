@@ -3,14 +3,12 @@ package handlers
 import (
 	"encoding/json"
 	"github.com/go-chi/render"
-	"io/ioutil"
 	"net/http"
 )
 
-func SearchUsers(w http.ResponseWriter, r *http.Request) {
-	f, _ := ioutil.ReadFile(store)
+func (manager *userApiHandler) SearchUsers(w http.ResponseWriter, r *http.Request) {
 	s := UserStore{}
-	_ = json.Unmarshal(f, &s)
+	_ = json.Unmarshal(manager.file.File, &s)
 
 	render.JSON(w, r, s.List)
 }

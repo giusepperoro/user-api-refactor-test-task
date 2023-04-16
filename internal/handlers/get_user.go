@@ -4,14 +4,12 @@ import (
 	"encoding/json"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
-	"io/ioutil"
 	"net/http"
 )
 
-func GetUser(w http.ResponseWriter, r *http.Request) {
-	f, _ := ioutil.ReadFile(store)
+func (manager *userApiHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	s := UserStore{}
-	_ = json.Unmarshal(f, &s)
+	_ = json.Unmarshal(manager.file.File, &s)
 
 	id := chi.URLParam(r, "id")
 

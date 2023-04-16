@@ -12,10 +12,9 @@ import (
 
 func (c *UpdateUserRequest) Bind(r *http.Request) error { return nil }
 
-func UpdateUser(w http.ResponseWriter, r *http.Request) {
-	f, _ := ioutil.ReadFile(store)
+func (manager *userApiHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	s := UserStore{}
-	_ = json.Unmarshal(f, &s)
+	_ = json.Unmarshal(manager.file.File, &s)
 
 	request := UpdateUserRequest{}
 

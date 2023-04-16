@@ -10,10 +10,9 @@ import (
 	"refactoring/internal/errors"
 )
 
-func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	f, _ := ioutil.ReadFile(store)
+func (manager *userApiHandler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	s := UserStore{}
-	_ = json.Unmarshal(f, &s)
+	_ = json.Unmarshal(manager.file.File, &s)
 
 	id := chi.URLParam(r, "id")
 
