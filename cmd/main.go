@@ -18,8 +18,12 @@ func main() {
 	if err != nil {
 		log.Fatal("unable to get config file name from env")
 	}
-	file := storage.New(cfg)
+	file, err := storage.New(cfg)
+	if err != nil {
+		log.Fatal("failed to open storage file")
+	}
 	userApiHandle := handlers.NewUserApiHandler(*file, cfg)
+
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)
